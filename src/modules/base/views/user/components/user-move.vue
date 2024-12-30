@@ -30,13 +30,13 @@ async function open(ids: any[]) {
 			}
 		],
 		on: {
-			submit(data, { done, close }) {
+			async submit(data, { done, close }) {
 				if (!data.departmentId) {
 					ElMessage.warning('请选择部门');
 					return done();
 				}
 
-				ElMessageBox.confirm('转移到新部门，是否继续？', '提示', {
+				await ElMessageBox.confirm('转移到新部门，是否继续？', '提示', {
 					type: 'warning'
 				})
 					.then(() => {
@@ -52,10 +52,11 @@ async function open(ids: any[]) {
 							})
 							.catch(err => {
 								ElMessage.error(err.message);
-								done();
 							});
 					})
 					.catch(() => null);
+
+				done();
 			}
 		}
 	});
