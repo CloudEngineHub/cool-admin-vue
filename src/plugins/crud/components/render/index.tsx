@@ -1,17 +1,13 @@
 import { defineComponent, } from 'vue';
+import { CrudProps } from '../..';
 
 export default defineComponent({
 	name: 'cl-render',
 
 	props: {
+		...CrudProps,
 		modelValue: null,
-		scope: Object,
-		prop: String,
-		disabled: Boolean,
-		isDisabled: Boolean,
-		row: Object,
-		column: Object,
-		placeholder: String
+		placeholder: String,
 	},
 
 	setup(props, { slots, }) {

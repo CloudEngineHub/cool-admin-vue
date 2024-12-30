@@ -131,7 +131,7 @@
 </template>
 
 <script lang="ts" setup name="cl-upload">
-import { computed, ref, watch, type PropType, nextTick } from 'vue';
+import { computed, ref, watch, type PropType, nextTick, mergeProps } from 'vue';
 import { isArray, isEmpty, isNumber } from 'lodash-es';
 import VueDraggable from 'vuedraggable';
 import { ElMessage } from 'element-plus';
@@ -144,8 +144,10 @@ import { getUrls, getType } from '../utils';
 import { useUpload } from '../hooks';
 import UploadItem from './upload-item/index.vue';
 import type { Upload } from '../types';
+import { CrudProps } from '../../crud';
 
 const props = defineProps({
+	...CrudProps,
 	// 绑定值，单选时字符串，多选时字符串数组
 	modelValue: {
 		type: [String, Array],
@@ -200,14 +202,10 @@ const props = defineProps({
 	// 上传前钩子
 	beforeUpload: Function,
 	// 云端上传路径前缀
-	prefixPath: String,
-
-	// CRUD穿透值
-	isEdit: Boolean,
-	scope: Object,
-	prop: String,
-	isDisabled: Boolean
+	prefixPath: String
 });
+
+mergeProps(props, CrudProps);
 
 const emit = defineEmits(['update:modelValue', 'change', 'upload', 'success', 'error', 'progress']);
 

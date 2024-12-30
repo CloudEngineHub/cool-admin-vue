@@ -98,23 +98,23 @@ const Table = useTable({
 		{
 			prop: 'name',
 			label: '姓名',
-			minWidth: 150
+			minWidth: 120
 		},
 		{
 			prop: 'nickName',
 			label: '昵称',
-			minWidth: 150
+			minWidth: 120
 		},
 		{
 			prop: 'departmentName',
 			label: '部门名称',
-			minWidth: 150
+			minWidth: 120
 		},
 		{
 			prop: 'roleName',
 			label: '角色',
 			headerAlign: 'center',
-			minWidth: 150,
+			minWidth: 160,
 			dict: [],
 			formatter(row) {
 				return row.roleName?.split(',');
@@ -123,7 +123,7 @@ const Table = useTable({
 		{
 			prop: 'status',
 			label: '状态',
-			minWidth: 120,
+			minWidth: 100,
 			component: {
 				name: 'cl-switch'
 			}
@@ -131,12 +131,13 @@ const Table = useTable({
 		{
 			prop: 'phone',
 			label: '手机号码',
-			minWidth: 150
+			minWidth: 120
 		},
 		{
 			prop: 'remark',
 			label: '备注',
-			minWidth: 150
+			minWidth: 200,
+			showOverflowTooltip: true
 		},
 		{
 			prop: 'createTime',

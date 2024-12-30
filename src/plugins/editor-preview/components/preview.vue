@@ -10,7 +10,6 @@
 		:title="title"
 		:scrollbar="isScroll"
 		append-to-body
-		v-bind="$attrs"
 	>
 		<div class="cl-editor-preview">
 			<el-tabs v-if="list.length > 1" v-model="active" type="card" @tab-change="onTabChange">
@@ -34,7 +33,9 @@
 					:name="`cl-editor-${name}`"
 					height="100%"
 					preview
+					v-if="name"
 				/>
+				<el-text v-else>{{ content }}</el-text>
 
 				<slot name="append"></slot>
 			</div>
@@ -51,8 +52,9 @@
 import { useClipboard } from '@vueuse/core';
 import { ElMessage } from 'element-plus';
 import { isObject, isString } from 'lodash-es';
-import { nextTick, ref, computed, type PropType } from 'vue';
+import { nextTick, ref, computed, type PropType, useAttrs, mergeProps } from 'vue';
 import { useCool } from '/@/cool';
+import { CrudProps } from '../../crud';
 
 interface TabItem {
 	name: string;
@@ -61,12 +63,10 @@ interface TabItem {
 }
 
 const props = defineProps({
+	...CrudProps,
 	modelValue: String,
 	title: String,
-	name: {
-		type: String,
-		required: true
-	},
+	name: String,
 	text: {
 		type: String,
 		default: '点击查看'
@@ -84,10 +84,8 @@ const props = defineProps({
 		default: '60%'
 	},
 	formatter: Function,
-
 	// 多个内容展示
 	tabs: Array as PropType<TabItem[]>,
-
 	// 组件参数
 	props: Object
 });
@@ -153,6 +151,8 @@ async function open(data?: string | TabItem[]) {
 
 	visible.value = true;
 }
+
+function onOpened() {}
 
 // 设置内容
 function setContent(val: any) {
