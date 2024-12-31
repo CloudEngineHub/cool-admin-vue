@@ -220,7 +220,9 @@ const Table = useTable({
 			label: '权限',
 			headerAlign: 'center',
 			minWidth: 300,
-			dict: []
+			component: {
+				name: 'cl-dict'
+			}
 		},
 		{
 			prop: 'orderNum',

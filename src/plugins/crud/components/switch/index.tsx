@@ -1,14 +1,14 @@
 import { useCrud } from '@cool-vue/crud';
-import { ElMessage } from 'element-plus';
+import { ElMessage, ElMessageBox } from 'element-plus';
 import { defineComponent, ref, watch } from 'vue';
 import { isBoolean, isFunction } from 'lodash-es';
+import { CrudProps } from '../..';
 
 export default defineComponent({
 	name: 'cl-switch',
 
 	props: {
-		scope: null,
-		column: null,
+		...CrudProps,
 		modelValue: [Number, String, Boolean],
 		activeValue: {
 			type: [Number, String, Boolean],
@@ -18,7 +18,8 @@ export default defineComponent({
 			type: [Number, String, Boolean],
 			default: 0
 		},
-		api: Function
+		api: Function,
+		isCheck: Boolean
 	},
 
 	emits: ['update:modelValue', 'change'],
@@ -59,35 +60,49 @@ export default defineComponent({
 
 		// 监听改变
 		function onChange(val: boolean | string | number) {
-			if (props.column && props.scope) {
-				if (val !== undefined) {
-					if (
-						status.value === activeValue.value ||
-						status.value === inactiveValue.value
-					) {
-						const params = {
-							id: props.scope.id,
-							[props.column.property]: val
-						};
+			const next = () => {
+				if (props.column && props.scope) {
+					if (val !== undefined) {
+						if (
+							status.value === activeValue.value ||
+							status.value === inactiveValue.value
+						) {
+							const params = {
+								id: props.scope.id,
+								[props.column.property]: val
+							};
 
-						const req: Promise<any> = isFunction(props.api)
-							? props.api(params)
-							: Crud.value?.service.update(params);
+							const req: Promise<any> = isFunction(props.api)
+								? props.api(params)
+								: Crud.value?.service.update(params);
 
-						if (req) {
-							req.then(() => {
-								emit('update:modelValue', val);
-								emit('change', val);
-								ElMessage.success('更新成功');
-							}).catch(err => {
-								ElMessage.error(err.message);
-							});
+							if (req) {
+								req.then(() => {
+									emit('update:modelValue', val);
+									emit('change', val);
+									ElMessage.success('更新成功');
+								}).catch(err => {
+									ElMessage.error(err.message);
+								});
+							}
 						}
 					}
+				} else {
+					emit('update:modelValue', val);
+					emit('change', val);
 				}
+			}
+
+			if (props.isCheck) {
+				ElMessageBox.confirm(`确定要${val ? '开启' : '关闭'}吗？`, '提示', {
+					type: 'warning'
+				})
+					.then(() => {
+						next()
+					})
+					.catch(() => null)
 			} else {
-				emit('update:modelValue', val);
-				emit('change', val);
+				next()
 			}
 		}
 
