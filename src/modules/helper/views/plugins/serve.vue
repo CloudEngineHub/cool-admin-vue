@@ -47,17 +47,14 @@
 						</div>
 
 						<div class="f">
-							<el-button round @click="toDetail(item)">详情</el-button>
-							<el-button type="danger" round @click="toDel(item, index)"
-								>卸载</el-button
-							>
+							<cl-switch v-model="item.status" @change="onStatusChange(item)" />
 
 							<cl-flex1 />
 
-							<cl-switch
-								v-model="item.status"
-								@change="onStatusChange(item)"
-							></cl-switch>
+							<el-button type="danger" round @click="toDel(item, index)"
+								>卸载</el-button
+							>
+							<el-button round @click="toDetail(item)">详情</el-button>
 						</div>
 					</div>
 				</el-col>

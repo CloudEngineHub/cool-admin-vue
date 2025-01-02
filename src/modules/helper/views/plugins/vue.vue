@@ -44,12 +44,17 @@
 
 						<div class="f">
 							<cl-flex1 />
-							<el-button
-								v-if="item.demo && !isEmpty(item.demo)"
-								round
-								@click="det.open(item)"
-							>
+							<el-button round @click="det.open(item)" v-if="item.demo">
 								示例
+							</el-button>
+
+							<el-button
+								type="success"
+								round
+								@click="det.openDoc(item.doc)"
+								v-if="item.doc"
+							>
+								文档
 							</el-button>
 						</div>
 					</div>
@@ -63,6 +68,7 @@
 						:key="index"
 						:label="item.name"
 						:name="index"
+						:lazy="index != 0"
 					>
 						<component :is="item.component" />
 					</el-tab-pane>
@@ -140,6 +146,10 @@ const det = reactive({
 				})
 			);
 		}
+	},
+
+	openDoc(url: string) {
+		window.open(url);
 	}
 });
 </script>

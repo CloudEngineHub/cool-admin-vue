@@ -13,6 +13,7 @@ export declare interface ModuleConfig {
 	author?: string;
 	updateTime?: string;
 	demo?: { name: string; component: Component }[] | string;
+	doc?: string;
 	options?: {
 		[key: string]: any;
 	};

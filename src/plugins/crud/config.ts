@@ -17,6 +17,7 @@ export default (): Merge<ModuleConfig, CrudOptions> => {
 		version: '1.1.2',
 		updateTime: '2024-12-31',
 		demo: '/demo/crud',
+		doc: 'https://vue.cool-admin.com/src/guide/plugins/crud.html',
 
 		// 组件全注册
 		components: Object.values(import.meta.glob('./components/**/*.{vue,tsx}')),
