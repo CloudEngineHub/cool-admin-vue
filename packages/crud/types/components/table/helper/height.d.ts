@@ -1,4 +1,3 @@
-/// <reference types="../index" />
 export declare function useHeight({ config, Table }: {
     Table: Vue.Ref<any>;
     config: ClTable.Config;

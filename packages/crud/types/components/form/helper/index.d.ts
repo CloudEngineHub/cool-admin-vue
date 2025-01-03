@@ -1,4 +1,3 @@
-/// <reference types="../index" />
 export declare function useForm(): {
     Form: import("vue").Ref<any, any>;
     config: {
@@ -34,14 +33,14 @@ export declare function useForm(): {
                     icon?: any;
                     lazy?: boolean | undefined;
                 }[] | undefined;
-                justify?: "center" | "left" | "right" | undefined;
+                justify?: "left" | "center" | "right" | undefined;
                 color?: string | undefined;
                 mergeProp?: boolean | undefined;
                 labelWidth?: string | undefined;
                 error?: string | undefined;
                 showMessage?: boolean | undefined;
                 inlineMessage?: boolean | undefined;
-                size?: "default" | "small" | "medium" | undefined;
+                size?: "medium" | "default" | "small" | undefined;
             } | undefined;
             span?: number | undefined;
             col?: {
@@ -62,9 +61,10 @@ export declare function useForm(): {
             label?: string | undefined;
             renderLabel?: any;
             flex?: boolean | undefined;
-            hook?: ClForm.HookKey | {
-                bind?: ClForm.HookPipe | ClForm.HookPipe[] | undefined;
-                submit?: ClForm.HookPipe | ClForm.HookPipe[] | undefined;
+            hook?: "string" | "number" | "boolean" | "join" | AnyString | "empty" | "split" | "booleanNumber" | "datetimeRange" | "splitJoin" | "json" | {
+                bind?: (ClForm.Hook["Pipe"] | ClForm.Hook["Pipe"][]) | undefined;
+                submit?: (ClForm.Hook["Pipe"] | ClForm.Hook["Pipe"][]) | undefined;
+                reset?: ((prop: string) => string[]) | undefined;
             } | undefined;
             hidden?: boolean | ((options: {
                 scope: obj;
@@ -170,25 +170,25 @@ export declare function useForm(): {
             } | undefined;
             rules?: {
                 [x: string]: any;
-                type?: "string" | "number" | "boolean" | "object" | "method" | "regexp" | "integer" | "float" | "array" | "enum" | "date" | "url" | "hex" | "email" | "any" | undefined;
+                type?: "string" | "number" | "boolean" | "method" | "regexp" | "integer" | "float" | "array" | "object" | "enum" | "date" | "url" | "hex" | "email" | "any" | undefined;
                 required?: boolean | undefined;
                 message?: string | undefined;
                 min?: number | undefined;
                 max?: number | undefined;
                 trigger?: any;
-                validator?: ((rule: any, value: any, callback: (error?: Error | undefined) => void) => void) | undefined;
+                validator?: ((rule: any, value: any, callback: (error?: Error) => void) => void) | undefined;
             } | {
                 [x: string]: any;
-                type?: "string" | "number" | "boolean" | "object" | "method" | "regexp" | "integer" | "float" | "array" | "enum" | "date" | "url" | "hex" | "email" | "any" | undefined;
+                type?: "string" | "number" | "boolean" | "method" | "regexp" | "integer" | "float" | "array" | "object" | "enum" | "date" | "url" | "hex" | "email" | "any" | undefined;
                 required?: boolean | undefined;
                 message?: string | undefined;
                 min?: number | undefined;
                 max?: number | undefined;
                 trigger?: any;
-                validator?: ((rule: any, value: any, callback: (error?: Error | undefined) => void) => void) | undefined;
+                validator?: ((rule: any, value: any, callback: (error?: Error) => void) => void) | undefined;
             }[] | undefined;
             required?: boolean | undefined;
-            children?: any[] | undefined;
+            children?: /*elided*/ any[] | undefined;
         }[];
         form: obj;
         isReset?: boolean | undefined;
@@ -205,7 +205,7 @@ export declare function useForm(): {
             hidden?: boolean | undefined;
             saveButtonText?: string | undefined;
             closeButtonText?: string | undefined;
-            justify?: "center" | "flex-start" | "flex-end" | undefined;
+            justify?: "flex-start" | "center" | "flex-end" | undefined;
             buttons?: (`slot-${string}` | ClForm.CloseAction | {
                 [x: string]: any;
                 label: string;
@@ -222,7 +222,7 @@ export declare function useForm(): {
             height?: string | undefined;
             width?: string | undefined;
             hideHeader?: boolean | undefined;
-            controls?: ("close" | AnyString | "fullscreen")[] | undefined;
+            controls?: Array<"fullscreen" | "close" | AnyString> | undefined;
         };
     };
     form: obj;

@@ -1,4 +1,3 @@
-/// <reference types="../index" />
 export declare function useData({ config, Table }: {
     config: ClTable.Config;
     Table: Vue.Ref<any>;

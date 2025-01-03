@@ -1,4 +1,3 @@
-/// <reference types="../index" />
 import { Mitt } from "../../utils/mitt";
 interface Options {
     mitt: Mitt;
@@ -19,5 +18,6 @@ export declare function useHelper({ config, crud, mitt }: Options): {
     getPermission: (key: "page" | "list" | "info" | "update" | "add" | "delete") => boolean;
     paramsReplace: (params: obj) => any;
     getParams: () => obj;
+    setParams: (data: obj) => void;
 };
 export {};

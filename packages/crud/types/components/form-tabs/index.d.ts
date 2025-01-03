@@ -6,11 +6,11 @@ declare const _default: import("vue").DefineComponent<import("vue").ExtractPropT
         default: () => never[];
     };
     justify: {
-        type: PropType<"center" | "left" | "right" | "justify" | "start" | "end" | "match-parent">;
+        type: PropType<"start" | "end" | "left" | "right" | "center" | "justify" | "match-parent">;
         default: string;
     };
     type: {
-        type: PropType<"default" | "card">;
+        type: PropType<"card" | "default">;
         default: string;
     };
 }>, () => any, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "update:modelValue")[], "change" | "update:modelValue", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
@@ -20,11 +20,11 @@ declare const _default: import("vue").DefineComponent<import("vue").ExtractPropT
         default: () => never[];
     };
     justify: {
-        type: PropType<"center" | "left" | "right" | "justify" | "start" | "end" | "match-parent">;
+        type: PropType<"start" | "end" | "left" | "right" | "center" | "justify" | "match-parent">;
         default: string;
     };
     type: {
-        type: PropType<"default" | "card">;
+        type: PropType<"card" | "default">;
         default: string;
     };
 }>> & Readonly<{

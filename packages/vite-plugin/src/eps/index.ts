@@ -429,9 +429,20 @@ function createService() {
 					// 不存在则创建
 					if (!d[k]) {
 						d[k] = {
-							namespace: path,
 							permission: {},
 						};
+					}
+
+					if (!d[k].namespace) {
+						d[k].namespace = path;
+					}
+
+					// 创建权限
+					if (d[k].namespace) {
+						getNames(d[k]).forEach((i) => {
+							d[k].permission[i] =
+								`${d[k].namespace.replace(`${id}/`, "")}/${i}`.replace(/\//g, ":");
+						});
 					}
 
 					// 创建方法
@@ -442,14 +453,6 @@ function createService() {
 						if (n && !/[-:]/g.test(n)) {
 							d[k][n] = a;
 						}
-					});
-
-					// 创建权限
-					getNames(d[k]).forEach((i) => {
-						d[k].permission[i] = `${d[k].namespace.replace(`${id}/`, "")}/${i}`.replace(
-							/\//g,
-							":",
-						);
 					});
 				}
 			}

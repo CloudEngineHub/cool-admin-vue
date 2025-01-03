@@ -1,4 +1,3 @@
-/// <reference types="../index" />
 export declare function useTable(props: any): {
     Table: import("vue").Ref<any, any>;
     config: {
@@ -124,14 +123,14 @@ export declare function useTable(props: any): {
                 column: any;
                 $index: number;
             }) => any;
-            sortable: boolean | "asc" | "desc" | "descending" | "ascending" | "custom";
+            sortable: boolean | "desc" | "descending" | "ascending" | "asc" | "custom";
             sortMethod: fn;
             sortBy: string | any[] | ((row: any, index: number) => any);
             resizable: boolean;
             columnKey: string;
             headerAlign: ElementPlus.Align;
             showOverflowTooltip: boolean;
-            fixed: string | boolean;
+            fixed: boolean | string;
             formatter: (row: any, column: any, value: any, index: number) => any;
             selectable: (row: any, index: number) => boolean;
             reserveSelection: boolean;
@@ -140,9 +139,9 @@ export declare function useTable(props: any): {
             filters: unknown[];
             filterPlacement: string;
             filterMultiple: boolean;
-            index: number | ((index: number) => number);
+            index: ((index: number) => number) | number;
             sortOrders: unknown[];
-            children: any[];
+            children: /*elided*/ any[];
         }[];
         autoHeight: boolean;
         height: any;
@@ -154,7 +153,7 @@ export declare function useTable(props: any): {
             ellipsis?: boolean | undefined;
             disabled?: boolean | undefined;
             hidden?: boolean | undefined;
-            children?: any[] | undefined;
+            children?: /*elided*/ any[] | undefined;
             showChildren?: boolean | undefined;
             callback?: ((done: fn) => void) | undefined;
         } | ((row: obj, column: obj, event: PointerEvent) => ClContextMenu.Item) | "check" | "order-desc" | "order-asc")[];

@@ -1,4 +1,3 @@
-/// <reference types="../index" />
 export declare function useTabs({ config, Form }: {
     config: ClForm.Config;
     Form: Vue.Ref<any>;

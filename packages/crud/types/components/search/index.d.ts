@@ -1,4 +1,3 @@
-/// <reference types="../index" />
 import { PropType } from "vue";
 declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     inline: {
@@ -14,7 +13,7 @@ declare const _default: import("vue").DefineComponent<import("vue").ExtractPropT
         default: () => {};
     };
     items: {
-        type: PropType<ClForm.Item<any>[]>;
+        type: PropType<ClForm.Item[]>;
         default: () => never[];
     };
     resetBtn: {
@@ -38,7 +37,7 @@ declare const _default: import("vue").DefineComponent<import("vue").ExtractPropT
         default: () => {};
     };
     items: {
-        type: PropType<ClForm.Item<any>[]>;
+        type: PropType<ClForm.Item[]>;
         default: () => never[];
     };
     resetBtn: {

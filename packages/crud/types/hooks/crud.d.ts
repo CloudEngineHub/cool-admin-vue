@@ -1,4 +1,3 @@
-/// <reference types="../index" />
 import { Ref } from "vue";
 export declare function useCrud(options?: ClCrud.Options, cb?: (app: ClCrud.Ref) => void): Ref<ClCrud.Ref | undefined, ClCrud.Ref | undefined>;
 export declare function useUpsert<T = any>(options?: ClUpsert.Options<T>): Ref<ClUpsert.Ref<any> | undefined, ClUpsert.Ref<any> | undefined>;

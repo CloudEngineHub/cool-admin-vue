@@ -1,4 +1,3 @@
-/// <reference types="../index" />
 import { type PropType } from "vue";
 declare const ClContextMenu: import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     show: BooleanConstructor;

@@ -1,8 +1,7 @@
-/// <reference types="../index" />
 import { PropType } from "vue";
 declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     items: {
-        type: PropType<ClForm.Item<any>[]>;
+        type: PropType<ClForm.Item[]>;
         default: () => never[];
     };
     title: StringConstructor;
@@ -17,7 +16,7 @@ declare const _default: import("vue").DefineComponent<import("vue").ExtractPropT
     onSearch: FunctionConstructor;
 }>, () => any, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("clear" | "reset")[], "clear" | "reset", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     items: {
-        type: PropType<ClForm.Item<any>[]>;
+        type: PropType<ClForm.Item[]>;
         default: () => never[];
     };
     title: StringConstructor;

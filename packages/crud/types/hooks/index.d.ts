@@ -1,4 +1,3 @@
-/// <reference types="../index" />
 import { Mitt } from "../utils/mitt";
 export declare function useCore(): {
     crud: ClCrud.Ref;

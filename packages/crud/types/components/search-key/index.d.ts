@@ -6,10 +6,10 @@ declare const _default: import("vue").DefineComponent<import("vue").ExtractPropT
         default: string;
     };
     fieldList: {
-        type: PropType<{
+        type: PropType<Array<{
             label: string;
             value: string;
-        }[]>;
+        }>>;
         default: () => never[];
     };
     onSearch: FunctionConstructor;
@@ -26,10 +26,10 @@ declare const _default: import("vue").DefineComponent<import("vue").ExtractPropT
         default: string;
     };
     fieldList: {
-        type: PropType<{
+        type: PropType<Array<{
             label: string;
             value: string;
-        }[]>;
+        }>>;
         default: () => never[];
     };
     onSearch: FunctionConstructor;

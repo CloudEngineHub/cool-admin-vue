@@ -1,4 +1,3 @@
-/// <reference types="../index" />
 /**
  * 解析 form.hidden
  */

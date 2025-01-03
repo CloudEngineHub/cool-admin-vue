@@ -1,4 +1,3 @@
-/// <reference types="../index" />
 export declare function useOp({ config }: {
     config: ClTable.Config;
 }): {
