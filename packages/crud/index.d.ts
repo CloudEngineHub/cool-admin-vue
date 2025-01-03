@@ -289,6 +289,7 @@ declare namespace ClCrud {
 		set(key: "dict" | "style" | "service" | "permission", value: any): void;
 		done(): void;
 		getParams(): obj;
+		setParams(data: obj): void;
 		getPermission(key?: string): boolean;
 		rowInfo(data: obj): void;
 		rowAdd(): void;
@@ -462,25 +463,27 @@ declare namespace ClForm {
 		[key: string]: any;
 	}
 
-	type HookFn = (
-		value: any,
-		options: { form: obj; prop: string; method: "submit" | "bind" }
-	) => any;
-
-	type HookKey =
-		| "number"
-		| "string"
-		| "split"
-		| "join"
-		| "boolean"
-		| "booleanNumber"
-		| "datetimeRange"
-		| "splitJoin"
-		| "json"
-		| "empty"
-		| AnyString;
-
-	type HookPipe = HookKey | HookFn;
+	interface Hook {
+		Fn: (value: any, options: { form: obj; prop: string; method: "submit" | "bind" }) => any;
+		Key:
+			| "number"
+			| "string"
+			| "split"
+			| "join"
+			| "boolean"
+			| "booleanNumber"
+			| "datetimeRange"
+			| "splitJoin"
+			| "json"
+			| "empty"
+			| AnyString;
+		Pipe: Hook["Key"] | Hook["Fn"];
+		Event: {
+			bind?: Hook["Pipe"] | Hook["Pipe"][];
+			submit?: Hook["Pipe"] | Hook["Pipe"][];
+			reset?: (prop: string) => string[];
+		};
+	}
 
 	interface Item<T = any> {
 		type?: "tabs";
@@ -516,12 +519,7 @@ declare namespace ClForm {
 		label?: string;
 		renderLabel?: any;
 		flex?: boolean;
-		hook?:
-			| HookKey
-			| {
-					bind?: HookPipe | HookPipe[];
-					submit?: HookPipe | HookPipe[];
-			  };
+		hook?: Hook["Event"] | Hook["Key"];
 		hidden?: boolean | ((options: { scope: obj }) => boolean);
 		prepend?: Render.Component;
 		component?: Render.Component;

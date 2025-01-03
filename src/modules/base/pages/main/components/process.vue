@@ -121,26 +121,29 @@ function openCM(e: any, item: Process.Item) {
 		list: [
 			{
 				label: '关闭当前',
-				hidden: item.fullPath !== route.path,
+				hidden: item.path !== route.path,
 				callback(done) {
-					onDel(process.list.findIndex(e => e.fullPath == item.fullPath));
 					done();
+
+					process.close();
 					toPath();
 				}
 			},
 			{
 				label: '关闭其他',
 				callback(done) {
-					process.set(process.list.filter(e => e.fullPath == item.fullPath));
 					done();
+
+					process.set(process.list.filter(e => e.fullPath == item.fullPath));
 					toPath();
 				}
 			},
 			{
 				label: '关闭所有',
 				callback(done) {
-					process.clear();
 					done();
+
+					process.clear();
 					toPath();
 				}
 			}

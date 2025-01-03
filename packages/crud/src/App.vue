@@ -3,6 +3,10 @@
 		<div class="title">CRUD DEMO v7</div>
 
 		<cl-crud ref="Crud">
+			<div class="search">
+				<cl-search ref="Search" />
+			</div>
+
 			<cl-row>
 				<cl-add-btn />
 
@@ -40,7 +44,7 @@
 
 <script setup lang="tsx">
 import { computed } from "vue";
-import { useTable, useForm, useUpsert, useCrud } from "./hooks";
+import { useTable, useForm, useUpsert, useCrud, useSearch } from "./hooks";
 import { EditPen } from "@element-plus/icons-vue";
 
 interface Data {
@@ -76,7 +80,6 @@ const Upsert = useUpsert<Data>({
 		},
 		{
 			group: "B",
-			prop: "证书",
 			component: {
 				name: "el-input"
 			},
@@ -166,6 +169,26 @@ const Crud = useCrud(
 );
 
 const Form = useForm<Data>();
+
+const Search = useSearch({
+	collapse: true,
+	resetBtn: true,
+	items: [
+		{
+			label: "姓名",
+			prop: "name",
+			component: {
+				name: "el-input"
+			},
+			hook: {
+				reset() {
+					console.log(1111);
+					return [];
+				}
+			}
+		}
+	]
+});
 </script>
 
 <style scoped>
@@ -173,5 +196,12 @@ const Form = useForm<Data>();
 	text-align: center;
 	font-size: 14px;
 	font-weight: bold;
+}
+
+.search {
+	background-color: #f7f7f7;
+	border-radius: 8px;
+	padding: 10px;
+	margin-bottom: 10px;
 }
 </style>

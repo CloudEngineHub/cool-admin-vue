@@ -14,6 +14,7 @@ import {
 import { useApi } from "../form/helper";
 import { Search, Refresh, Bottom, Top } from "@element-plus/icons-vue";
 import { mitt } from "../../utils/mitt";
+import { isArray, isObject, isString } from "lodash-es";
 
 export default defineComponent({
 	name: "cl-search",
@@ -121,6 +122,16 @@ export default defineComponent({
 			const d: any = {};
 
 			config.items?.map((e) => {
+				if (typeof e.hook != 'string' && e.hook?.reset) {
+					const props = e.hook.reset(e.prop!)
+
+					if (isArray(props)) {
+						props.forEach((prop) => {
+							d[prop] = undefined;
+						})
+					}
+				}
+
 				d[e.prop!] = undefined;
 			});
 
@@ -128,7 +139,7 @@ export default defineComponent({
 			Form.value?.reset();
 
 			// 列表刷新
-			crud.refresh(d);
+			search(d);
 
 			// 重置事件
 			emit("reset", d);

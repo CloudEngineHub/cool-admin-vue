@@ -139,7 +139,7 @@ export function renderNode(vnode: any, options: Options) {
 
 			if (placeholder) {
 				if (!item.component.props.placeholder) {
-					item.component.props.placeholder = placeholder + item.label;
+					item.component.props.placeholder = placeholder + (item.label || '');
 				}
 			}
 		}

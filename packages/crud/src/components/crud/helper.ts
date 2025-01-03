@@ -220,6 +220,11 @@ export function useHelper({ config, crud, mitt }: Options) {
 		return crud.params;
 	}
 
+	// 替换请求参数
+	function setParams(data: obj) {
+		merge(crud.params, data);
+	}
+
 	// 设置
 	function set(key: string, value: any) {
 		if (!value) {
@@ -276,6 +281,7 @@ export function useHelper({ config, crud, mitt }: Options) {
 		refresh,
 		getPermission,
 		paramsReplace,
-		getParams
+		getParams,
+		setParams
 	};
 }

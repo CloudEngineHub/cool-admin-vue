@@ -3,6 +3,7 @@ import { Close } from "@element-plus/icons-vue";
 import { useBrowser, useConfig, useCore } from "../../hooks";
 import { renderNode } from "../../utils/vnode";
 import { useApi } from "../form/helper";
+import { isArray } from "lodash-es";
 
 export default defineComponent({
 	name: "cl-adv-search",
@@ -58,7 +59,7 @@ export default defineComponent({
 		function open() {
 			visible.value = true;
 
-			nextTick(function () {
+			nextTick(() => {
 				Form.value?.open({
 					items: config.items || [],
 					op: {
@@ -76,9 +77,30 @@ export default defineComponent({
 
 		// 重置数据
 		function reset() {
+			const d: any = {};
+
+			config.items?.map((e) => {
+				if (typeof e.hook != 'string' && e.hook?.reset) {
+					const props = e.hook.reset(e.prop!)
+
+					if (isArray(props)) {
+						props.forEach((prop) => {
+							d[prop] = undefined;
+						})
+					}
+				}
+
+				d[e.prop!] = undefined;
+			});
+
+			// 重置表单
 			Form.value?.reset();
-			emit("reset");
+
+			// 列表刷新
 			search();
+
+			// 重置事件
+			emit("reset", d);
 		}
 
 		// 清空数据
@@ -88,24 +110,22 @@ export default defineComponent({
 		}
 
 		// 搜素请求
-		function search() {
-			Form.value?.submit((data) => {
-				function next(params: any) {
-					Form.value?.done();
-					close();
+		function search(params?: any) {
+			function next(data: any) {
+				Form.value?.done();
+				close();
 
-					return crud.refresh({
-						...params,
-						page: 1
-					});
-				}
+				return crud.refresh({
+					...data,
+					page: 1
+				});
+			}
 
-				if (config.onSearch) {
-					config.onSearch(data, { next, close });
-				} else {
-					next(data);
-				}
-			});
+			if (config.onSearch) {
+				config.onSearch(params, { next, close });
+			} else {
+				next(params);
+			}
 		}
 
 		// 消息事件

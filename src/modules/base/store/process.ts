@@ -26,6 +26,15 @@ export const useProcessStore = defineStore('process', function () {
 		}
 	}
 
+	// 关闭当前
+	function close() {
+		const index = list.value.findIndex(e => e.active);
+
+		if (index > -1) {
+			list.value.splice(index, 1);
+		}
+	}
+
 	// 移除
 	function remove(index: number) {
 		list.value.splice(index, 1);
@@ -54,6 +63,7 @@ export const useProcessStore = defineStore('process', function () {
 		list,
 		add,
 		remove,
+		close,
 		set,
 		clear,
 		setTitle
