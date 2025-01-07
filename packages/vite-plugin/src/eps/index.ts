@@ -437,14 +437,6 @@ function createService() {
 						d[k].namespace = path;
 					}
 
-					// 创建权限
-					if (d[k].namespace) {
-						getNames(d[k]).forEach((i) => {
-							d[k].permission[i] =
-								`${d[k].namespace.replace(`${id}/`, "")}/${i}`.replace(/\//g, ":");
-						});
-					}
-
 					// 创建方法
 					e.api.forEach((a) => {
 						// 方法名
@@ -454,6 +446,14 @@ function createService() {
 							d[k][n] = a;
 						}
 					});
+
+					// 创建权限
+					if (d[k].namespace) {
+						getNames(d[k]).forEach((i) => {
+							d[k].permission[i] =
+								`${d[k].namespace.replace(`${id}/`, "")}/${i}`.replace(/\//g, ":");
+						});
+					}
 				}
 			}
 		}
